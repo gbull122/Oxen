@@ -15,7 +15,13 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Fluent:Ribbon Grid.Row="0" prism:RegionManager.RegionName="{x:Static core:RegionNames.Ribbon}" />
+        <Fluent:Ribbon Grid.Row="0" prism:RegionManager.RegionName="{x:Static core:RegionNames.Ribbon}">
+            <Fluent:Ribbon.Menu>
+                <Fluent:Backstage Header="Settings">
+                    <Fluent:BackstageTabControl prism:RegionManager.RegionName="{x:Static core:RegionNames.Backstage}" />
+                </Fluent:Backstage>
+            </Fluent:Ribbon.Menu>
+        </Fluent:Ribbon>
 
         <ContentControl Grid.Row="1" prism:RegionManager.RegionName="{x:Static core:RegionNames.Content}" />
 

@@ -7,8 +7,4 @@
     <BaseOutputPath>C:\Users\georg\Documents\GitHub\Oxen\bin\</BaseOutputPath>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Gb.Oxen.Core.DataInterfaces\Gb.Oxen.Core.Interfaces.csproj" />
-  </ItemGroup>
-
 </Project>

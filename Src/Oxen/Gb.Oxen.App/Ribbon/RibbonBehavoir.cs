@@ -1,10 +1,10 @@
 ﻿using Fluent;
 using Prism.Regions;
-using System;
 using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Gb.Oxen.App.Ribbon
 {
@@ -28,10 +28,8 @@ namespace Gb.Oxen.App.Ribbon
             {
                 foreach (object newItem in e.NewItems)
                 {
-                    var view = newItem as UserControl;
-                    var ribbonFromView = GetRibbonFromView(view);
-
-                    MergeRibbon(newItem, ribbonFromView);
+                    var newRibbon = newItem as Fluent.Ribbon;
+                    MergeRibbon(newRibbon);
                 }
             }
         }
@@ -47,12 +45,12 @@ namespace Gb.Oxen.App.Ribbon
             return foundControl;
         }
 
-        protected void MergeRibbon(object sourceView, Fluent.Ribbon moduleRibbon)
+        protected void MergeRibbon(Fluent.Ribbon moduleRibbon)
         {
             //MergeApplicationMenu(sourceView, moduleRibbon, ribbon);
             //MergeQuickAccessToolbar(sourceView, moduleRibbon, ribbon);
             //MergeContextualTabGroups(sourceView, moduleRibbon, ribbon);
-            MergeTabs(sourceView, moduleRibbon);
+            MergeTabs(moduleRibbon);
 
             //var ribbonTabs = ribbon.Tabs.Cast<UIElement>().ToArray();
             //var moduleTabs = moduleRibbon.Tabs.Cast<UIElement>().ToArray();
@@ -66,56 +64,16 @@ namespace Gb.Oxen.App.Ribbon
             //MergeItemsControl(sourceView, moduleItemsControl, ribbontemsControl);
         }
 
-        protected void MergeTabs(object sourceView, Fluent.Ribbon moduleRibbon)
+        protected void MergeTabs(Fluent.Ribbon moduleRibbon)
         {
             var tabs = moduleRibbon.Tabs;
             foreach (var tab in tabs)
             {
-                if (tab.Header.Equals(HOME_TAB))
-                {
-                    var groups = tab.Groups;
-                    var homeTab = GetHomeTab();
-
-                    foreach (var group in groups)
-                    {
-                        DisconnectFromParent(sourceView, group);
-                        try
-                        {
-                            homeTab.Groups.Add(group);
-                        }
-                        catch (Exception w)
-                        {
-                            var e = w.Message;
-                        }
-
-                    }
-                }
-                else
-                {
-                    DisconnectFromParent(sourceView, tab);
-                    MainRibbon.Tabs.Add(tab);
-                }
+                DisconnectFromParent(moduleRibbon, tab);
+                MainRibbon.Tabs.Add(tab);
             }
-            //if (moduleRibbon.QuickAccessToolBar != null)
-            //{
-            //    if (ribbon.QuickAccessToolBar == null)
-            //        ribbon.QuickAccessToolBar = new RibbonQuickAccessToolBar();
-            //    MergeItemsControl(sourceView, moduleRibbon.QuickAccessToolBar, ribbon.QuickAccessToolBar);
-            //}
         }
 
-
-
-        protected Fluent.RibbonTabItem GetHomeTab()
-        {
-            var tabs = MainRibbon.Tabs;
-            foreach (var tab in tabs)
-            {
-                if (tab.Header.Equals(HOME_TAB))
-                    return tab;
-            }
-            return null;
-        }
         protected void MergeQuickAccessToolbar(object sourceView, Fluent.Ribbon moduleRibbon, Fluent.Ribbon ribbon)
         {
             //if (moduleRibbon.QuickAccessToolBar != null)
