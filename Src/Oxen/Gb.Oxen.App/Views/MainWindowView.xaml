@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Fluent="urn:fluent-ribbon"
+    xmlns:avalonDock="https://github.com/Dirkster99/AvalonDock"
     xmlns:core="clr-namespace:Gb.Oxen.Core;assembly=Gb.Oxen.Core"
     xmlns:prism="http://prismlibrary.com/"
     Title="Oxen"
@@ -23,7 +24,24 @@
             </Fluent:Ribbon.Menu>
         </Fluent:Ribbon>
 
-        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="{x:Static core:RegionNames.Content}" />
+        <avalonDock:DockingManager Grid.Row="1" prism:RegionManager.RegionName="{x:Static core:RegionNames.Content}"
+                                    AnchorableTitleTemplate="{StaticResource AnchorableTitleTemplate}">
+            <avalonDock:LayoutRoot>
+                <avalonDock:LayoutPanel x:Name="VerticalPanel" Orientation="Vertical">
+
+                    <avalonDock:LayoutPanel x:Name="HorizontalPanel" Orientation="Horizontal">
+
+                        <avalonDock:LayoutAnchorablePane x:Name="ControlPanel" DockMinWidth="300" />
+
+                        <avalonDock:LayoutDocumentPane x:Name="DocumentPanel"/>
+
+                    </avalonDock:LayoutPanel>
+
+                    <avalonDock:LayoutAnchorablePane x:Name="LowerPanel" DockHeight="100" />
+
+                </avalonDock:LayoutPanel>
+            </avalonDock:LayoutRoot>
+        </avalonDock:DockingManager>
 
         <ContentControl Grid.Row="2" prism:RegionManager.RegionName="{x:Static core:RegionNames.Status}" />
 

@@ -1,4 +1,6 @@
-﻿using Gb.Oxen.App.Ribbon;
+﻿using AvalonDock;
+using Gb.Oxen.App.Docking;
+using Gb.Oxen.App.Ribbon;
 using Gb.Oxen.App.Views;
 using Prism.DryIoc;
 using Prism.Ioc;
@@ -26,6 +28,7 @@ namespace Gb.Oxen.App
 
         protected override void ConfigureRegionAdapterMappings(RegionAdapterMappings regionAdapterMappings)
         {
+            regionAdapterMappings.RegisterMapping(typeof(DockingManager), Container.Resolve<DockingRegionAdapter>());
             regionAdapterMappings.RegisterMapping(typeof(Fluent.Ribbon), Container.Resolve<RibbonRegionAdapter>());
             regionAdapterMappings.RegisterMapping(typeof(Fluent.BackstageTabControl), Container.Resolve<BackstageRegionAdapter>());
             base.ConfigureRegionAdapterMappings(regionAdapterMappings);
