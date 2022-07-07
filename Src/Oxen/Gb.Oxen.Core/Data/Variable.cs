@@ -1,4 +1,4 @@
-﻿using Gb.Oxen.Core.Interfaces;
+﻿using Gb.Oxen.Core.Interfaces.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

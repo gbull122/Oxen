@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Gb.Oxen.Core.Interfaces
+namespace Gb.Oxen.Core.Interfaces.Data
 {
     public interface IVariable
     {

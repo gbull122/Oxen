@@ -1,29 +1,25 @@
-﻿<Fluent:Ribbon 
+﻿<Fluent:Ribbon
     x:Class="Gb.Oxen.Csv.Views.RibbonView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Fluent="urn:fluent-ribbon"
-     xmlns:core="clr-namespace:Gb.Oxen.Core;assembly=Gb.Oxen.Core">
+    xmlns:core="clr-namespace:Gb.Oxen.Core;assembly=Gb.Oxen.Core">
 
-    <Fluent:RibbonTabItem
-        Header="{x:Static core:RibbonNames.Main}">
+    <Fluent:RibbonTabItem Header="{x:Static core:RibbonNames.Main}">
 
-        <Fluent:RibbonGroupBox
-            Header="{x:Static core:RibbonNames.Data}">
+        <Fluent:RibbonGroupBox Header="{x:Static core:RibbonNames.Data}">
 
             <Fluent:Button
-                    AutomationProperties.AutomationId="RbBtnLoadCsv"
-                    Header="Load"
-                    Command="{Binding LoadCsvCommand}"
-                    ToolTip="Load data from CSV">
-            </Fluent:Button>
+                AutomationProperties.AutomationId="RbBtnLoadCsv"
+                Command="{Binding LoadCommand}"
+                Header="Load Csv"
+                ToolTip="Load data from CSV" />
 
             <Fluent:Button
-                    AutomationProperties.AutomationId="RbBtnSave"
-                    Header="Save"
-                    Command="{Binding SaveCSVCommand}"
-                    ToolTip="Save the current data sets to CSV">
-            </Fluent:Button>
+                AutomationProperties.AutomationId="RbBtnSave"
+                Command="{Binding SaveCommand}"
+                Header="Save Csv"
+                ToolTip="Save the current data sets to CSV" />
 
         </Fluent:RibbonGroupBox>
 

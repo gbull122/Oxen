@@ -1,4 +1,4 @@
-﻿namespace Gb.Oxen.Core.Interfaces
+﻿namespace Gb.Oxen.Core.Interfaces.Data
 {
     public enum DataFormat
     {

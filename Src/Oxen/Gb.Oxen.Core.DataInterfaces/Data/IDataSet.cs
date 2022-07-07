@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Gb.Oxen.Core.Interfaces
+namespace Gb.Oxen.Core.Interfaces.Data
 {
     public interface IDataSet
     {
