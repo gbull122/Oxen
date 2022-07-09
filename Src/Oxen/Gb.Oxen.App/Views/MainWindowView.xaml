@@ -9,6 +9,41 @@
     Title="Oxen"
     WindowState="Maximized">
 
+    <Window.Resources>
+        <ResourceDictionary>
+
+            <DataTemplate 
+            x:Key="DocumentTitleTemplate">
+                <DockPanel>
+                    <TextBlock 
+                        Text="{Binding Path=Content.DataContext.Title}"
+                        DockPanel.Dock="Left"
+                        TextTrimming="CharacterEllipsis" />
+                </DockPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="AnchorablePaneTitleTempplate">
+                <DockPanel>
+                    <TextBlock 
+                        Text="{Binding Path=Content.DataContext.Title}"
+                        DockPanel.Dock="Left"
+                        TextTrimming="CharacterEllipsis" />
+                </DockPanel>
+            </DataTemplate>
+
+            <DataTemplate 
+            x:Key="DocumentHeaderTemplate">
+                <DockPanel>
+                    <TextBlock 
+                    Text="{Binding Path=Content.DataContext.Title}"
+                    TextTrimming="CharacterEllipsis" />
+                </DockPanel>
+            </DataTemplate>
+
+            <Style TargetType="{x:Type avalonDock:AnchorablePaneTitle}"
+                   BasedOn="{StaticResource AnchorablePaneTitleStyle}"/>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -23,15 +58,17 @@
                 </Fluent:Backstage>
             </Fluent:Ribbon.Menu>
         </Fluent:Ribbon>
-
-        <avalonDock:DockingManager Grid.Row="1" prism:RegionManager.RegionName="{x:Static core:RegionNames.Content}"
-                                    AnchorableTitleTemplate="{StaticResource AnchorableTitleTemplate}">
+        
+        <avalonDock:DockingManager  x:Name="dockingManager" 
+            Grid.Row="1" prism:RegionManager.RegionName="{x:Static core:RegionNames.Content}">
             <avalonDock:LayoutRoot>
                 <avalonDock:LayoutPanel x:Name="VerticalPanel" Orientation="Vertical">
 
                     <avalonDock:LayoutPanel x:Name="HorizontalPanel" Orientation="Horizontal">
 
-                        <avalonDock:LayoutAnchorablePane x:Name="ControlPanel" DockMinWidth="300" />
+                        <avalonDock:LayoutAnchorablePane x:Name="ControlPanel" DockMinWidth="300">
+
+                        </avalonDock:LayoutAnchorablePane>
 
                         <avalonDock:LayoutDocumentPane x:Name="DocumentPanel"/>
 

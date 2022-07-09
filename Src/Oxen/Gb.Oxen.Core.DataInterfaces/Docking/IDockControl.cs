@@ -1,15 +1,8 @@
-﻿namespace Gb.Oxen.Core.Interfaces.Docking
+﻿namespace Gb.Oxen.Core.Interfaces.Docking;
+
+public interface IDockControl
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    string Title { get; }
 
-    public interface IDockControl
-    {
-        string Title { get; }
-
-        DockingLocation Position{ get; }
-    }
+    DockingLocation Position { get; }
 }

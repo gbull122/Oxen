@@ -1,106 +1,130 @@
-﻿namespace Gb.Oxen.App.Docking
+﻿namespace Gb.Oxen.App.Docking;
+
+using AvalonDock;
+using AvalonDock.Controls;
+using AvalonDock.Layout;
+using Gb.Oxen.Core.Interfaces.Docking;
+using Prism.Regions;
+using Prism.Regions.Behaviors;
+using System;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Windows;
+
+public class DockingBehavior : RegionBehavior, IHostAwareRegionBehavior
 {
-    using AvalonDock;
-    using AvalonDock.Controls;
-    using AvalonDock.Layout;
-    using Gb.Oxen.Core.Interfaces.Docking;
-    using Prism.Regions;
-    using Prism.Regions.Behaviors;
-    using System;
-    using System.Collections.Specialized;
-    using System.Linq;
-    using System.Windows;
+    private DockingManager dockingManager;
 
-    public class DockingBehavior : RegionBehavior, IHostAwareRegionBehavior
+    public static readonly string BehaviorKey = "DockingManagerBehavior";
+
+    public DependencyObject HostControl
     {
-        private DockingManager dockingManager;
-
-        public static readonly string BehaviorKey = "DockingManagerBehavior";
-
-        public DependencyObject HostControl
+        get
         {
-            get
+            return dockingManager;
+        }
+
+        set
+        {
+            dockingManager = value as DockingManager;
+
+        }
+    }
+
+    protected override void OnAttach()
+    {
+        Region.ActiveViews.CollectionChanged += ActiveViewsCollectionChanged;
+        Region.Views.CollectionChanged += ViewsCollectionChanged;
+        dockingManager.DocumentClosed += DockingManager_DocumentClosed;
+    }
+
+    private void DockingManager_DocumentClosed(object? sender, DocumentClosedEventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void ActiveViewsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        //if (e.Action == NotifyCollectionChangedAction.Add)
+        //{
+        //    foreach (object newItem in e.NewItems)
+        //    {
+        //        Type objectType = newItem.GetType();
+
+        //        var tnPanel = (IDockControl)GetDataContext(newItem) as IDockControl;
+
+        //        if (!Region.Views.Contains(newItem))
+        //        {
+        //            var anchorablePanel = new LayoutAnchorable();
+        //            anchorablePanel.Content = newItem;
+
+        //            if (tnPanel.Position == DockingLocation.ControlPanel)
+        //            {
+        //                var controlPanel = dockingManager.FindName("ControlPanel") as LayoutAnchorablePane;
+        //                controlPanel.Children.Add(anchorablePanel);
+        //                return;
+        //            }
+
+        //            var statusPanel = dockingManager.FindName("StatusPanel") as LayoutAnchorablePane;
+        //            statusPanel.Children.Add(anchorablePanel);
+        //        }
+        //    }
+        //}
+    }
+
+    private void ViewsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        if (e.Action == NotifyCollectionChangedAction.Add)
+        {
+            foreach (object newItem in e.NewItems)
             {
-                return dockingManager;
-            }
+                var test = GetDataContext(newItem);
+                if (test == null)
+                    return;
 
-            set
-            {
-                dockingManager = value as DockingManager;
+                var dockControl = (IDockControl)GetDataContext(newItem) as IDockControl;
 
-            }
-        }
-
-        protected override void OnAttach()
-        {
-            Region.ActiveViews.CollectionChanged += ActiveViewsCollectionChanged;
-            Region.Views.CollectionChanged += ViewsCollectionChanged;
-            dockingManager.DocumentClosed += DockingManager_DocumentClosed;
-        }
-
-        private void DockingManager_DocumentClosed(object? sender, DocumentClosedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ActiveViewsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-        }
-
-        private void ViewsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.Action == NotifyCollectionChangedAction.Add)
-            {
-                foreach (object newItem in e.NewItems)
+                if (dockControl.Position == DockingLocation.Document)
                 {
-                    var test = GetDataContext(newItem);
-                    if (test == null)
-                        return;
-
-                    var dockControl = (IDockControl)GetDataContext(newItem) as IDockControl;
-
-                    if (dockControl.Position == DockingLocation.Document)
+                    var document = new LayoutAnchorable
                     {
-                        var document = new LayoutAnchorable
-                        {
-                            CanClose = true,
-                            CanAutoHide = false
-                        };
+                        CanClose = true,
+                        CanAutoHide = false
+                    };
 
-                        document.Content = newItem;
+                    document.Content = newItem;
 
-                        var documentPanel = dockingManager.FindName("DocumentPanel") as LayoutDocumentPane;
+                    var documentPanel = dockingManager.FindName("DocumentPanel") as LayoutDocumentPane;
 
-                        documentPanel.Children.Add(document);
-                        document.IsActive = true;
-                        return;
-                    }
-
-
-                    if (dockControl.Position == DockingLocation.ControlPanel)
-                    {
-
-                        var anchorablePanel = new LayoutAnchorable();
-                        anchorablePanel.Content = newItem;
-                        anchorablePanel.CanClose = false;
-
-                        var controlPanel = dockingManager.FindName("ControlPanel") as LayoutAnchorablePane;
-                        controlPanel.Children.Add(anchorablePanel);
-
-                        var debug = controlPanel.IsVisible;
-                        return;
-                    }
-
-                    //var statusPanel = dockingManager.FindName("LowerPanel") as LayoutAnchorablePane;
-                    //statusPanel.Children.Add(anchorablePanel);
+                    documentPanel.Children.Add(document);
+                    document.IsActive = true;
+                    return;
                 }
+
+
+                if (dockControl.Position == DockingLocation.ControlPanel)
+                {
+
+                    var anchorablePanel = new LayoutAnchorable();
+                    anchorablePanel.Content = newItem;
+                    anchorablePanel.CanClose = false;
+                    anchorablePanel.Title=dockControl.Title;
+                    var controlPanel = dockingManager.FindName("ControlPanel") as LayoutAnchorablePane;
+                    controlPanel.Children.Add(anchorablePanel);
+
+                    var debug = controlPanel.IsVisible;
+                    return;
+                }
+
+                //var statusPanel = dockingManager.FindName("LowerPanel") as LayoutAnchorablePane;
+                //statusPanel.Children.Add(anchorablePanel);
             }
         }
+    }
 
-        private object GetDataContext(object item)
-        {
-            var frameworkElement = item as FrameworkElement;
-            return frameworkElement == null ? item : frameworkElement.DataContext;
-        }
+    private object GetDataContext(object item)
+    {
+        var frameworkElement = item as FrameworkElement;
+        return frameworkElement == null ? item : frameworkElement.DataContext;
     }
 }

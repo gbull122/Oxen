@@ -1,11 +1,10 @@
-﻿namespace Gb.Oxen.Core.Interfaces.Data
+﻿namespace Gb.Oxen.Core.Interfaces.Data;
+
+public enum DataFormat
 {
-    public enum DataFormat
-    {
-        Unknown,
-        Text,
-        Discrete,
-        Continuous,
-        DateTime
-    }
+    Unknown,
+    Text,
+    Discrete,
+    Continuous,
+    DateTime
 }
