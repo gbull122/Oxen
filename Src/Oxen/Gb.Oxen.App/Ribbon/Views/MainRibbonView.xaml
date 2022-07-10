@@ -7,12 +7,6 @@
 
     <Fluent:RibbonTabItem
         Header="{x:Static core:RibbonNames.Main}">
-
-        <Fluent:RibbonGroupBox
-            Header="{x:Static core:RibbonNames.Data}">
-            
-        </Fluent:RibbonGroupBox>
-        
     </Fluent:RibbonTabItem>
 
 </Fluent:Ribbon>

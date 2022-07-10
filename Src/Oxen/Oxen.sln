@@ -13,11 +13,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gb.Oxen.Core", "Gb.Oxen.Cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gb.Oxen.R", "Gb.Oxen.R\Gb.Oxen.R.csproj", "{AD8DAE0F-4C79-4BB3-A8F0-98496C7966E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gb.Oxen.Core.Interfaces", "Gb.Oxen.Core.DataInterfaces\Gb.Oxen.Core.Interfaces.csproj", "{C3E00E7B-9DFE-4B42-8265-EAA3D17DDEAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gb.Oxen.Core.Interfaces", "Gb.Oxen.Core.DataInterfaces\Gb.Oxen.Core.Interfaces.csproj", "{C3E00E7B-9DFE-4B42-8265-EAA3D17DDEAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gb.Oxen.RInterfaces", "Gb.Oxen.RInterfaces\Gb.Oxen.RInterfaces.csproj", "{3BE50498-94E7-452D-9CAD-66A38868421F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gb.Oxen.RInterfaces", "Gb.Oxen.RInterfaces\Gb.Oxen.RInterfaces.csproj", "{3BE50498-94E7-452D-9CAD-66A38868421F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gb.Oxen.Csv", "Gb.Oxen.Csv\Gb.Oxen.Csv.csproj", "{60195F26-0A05-4C8B-8589-4D5043A63C0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gb.Oxen.Csv", "Gb.Oxen.Csv\Gb.Oxen.Csv.csproj", "{60195F26-0A05-4C8B-8589-4D5043A63C0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gb.Oxen.Charting", "Gb.Oxen.Charting\Gb.Oxen.Charting.csproj", "{6496DAD4-6618-4577-9CFD-99B83946E964}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gb.Oxen.Charting.Interfaces", "Gb.Oxen.Charting.Interfaces\Gb.Oxen.Charting.Interfaces.csproj", "{6F4013E4-2B7A-4F3D-88FA-1F918513F086}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gb.Oxen.Charting.StandardProvider", "Gb.Oxen.Charting.StandardProvider\Gb.Oxen.Charting.StandardProvider.csproj", "{6BBCD543-9719-4338-AA2A-2A3149B74DD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +55,18 @@ Global
 		{60195F26-0A05-4C8B-8589-4D5043A63C0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60195F26-0A05-4C8B-8589-4D5043A63C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60195F26-0A05-4C8B-8589-4D5043A63C0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6496DAD4-6618-4577-9CFD-99B83946E964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6496DAD4-6618-4577-9CFD-99B83946E964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6496DAD4-6618-4577-9CFD-99B83946E964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6496DAD4-6618-4577-9CFD-99B83946E964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F4013E4-2B7A-4F3D-88FA-1F918513F086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F4013E4-2B7A-4F3D-88FA-1F918513F086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F4013E4-2B7A-4F3D-88FA-1F918513F086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F4013E4-2B7A-4F3D-88FA-1F918513F086}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BBCD543-9719-4338-AA2A-2A3149B74DD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BBCD543-9719-4338-AA2A-2A3149B74DD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BBCD543-9719-4338-AA2A-2A3149B74DD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BBCD543-9719-4338-AA2A-2A3149B74DD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
