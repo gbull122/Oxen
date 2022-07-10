@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
+﻿namespace Gb.Oxen.Core.Interfaces.Data;
 
-namespace Gb.Oxen.Core.Interfaces.Data
+using System.Collections.Generic;
+
+public interface IVariable
 {
-    public interface IVariable
-    {
-        IReadOnlyCollection<object> Values { get; }
-        int Length { get; }
-        string Name { get; }
-        string Id { get; }
-        DataFormat Format { get; }
-        bool IsSelected { get; set; }
-    }
+    IReadOnlyCollection<object> Values { get; }
+    int Length { get; }
+    string Name { get; }
+    string Id { get; }
+    DataFormat Format { get; }
+    bool IsSelected { get; set; }
 }

@@ -1,34 +1,18 @@
-﻿namespace Gb.Oxen.App.ViewModels
-{
-using Gb.Oxen.Core.Interfaces.Data;
-    using Gb.Oxen.Core.Interfaces.Docking;
-    using Gb.Oxen.Core.Interfaces.Services;
+﻿namespace Gb.Oxen.App.ViewModels;
+
+using Gb.Oxen.Core.Interfaces.Docking;
 using Prism.Mvvm;
-    using System.Collections.ObjectModel;
 
-    public class DataViewModel:BindableBase,IDockControl
+public class DataViewModel : BindableBase, IDockControl
+{
+    public string Title { get => "Data"; }
+
+    public DockingLocation Position => DockingLocation.ControlPanel;
+
+    public DataViewModel()
     {
-        private readonly IDataService dataService;
-
-        public string Title => "Data";
-
-        public DockingLocation Position => DockingLocation.ControlPanel;
-
-        public ObservableCollection<IDataSet> DataSets
-        {
-            get { return dataService.DataSets; }
-            set
-            {
-                dataService.DataSets = value;
-                RaisePropertyChanged(nameof(DataSets));
-            }
-        }
-
-        public DataViewModel(IDataService dataService)
-        {
-            this.dataService = dataService;
-        }
-
 
     }
+
+
 }
