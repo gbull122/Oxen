@@ -54,7 +54,11 @@ public class RibbonViewModel : BindableBase
                 return;
             }
 
+            IProgress<string> progress = new Progress<string>();
+            LoadCsvFile(progress, openFileDialog.FileName, dataSetName);
             //await progressService.ExecuteAsync(LoadCsvFile, openFileDialog.FileName, dataSetName);
         }
     }
+
+   
 }
