@@ -14,6 +14,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Gb.Oxen.Core\Gb.Oxen.Core.csproj" />
+    <ProjectReference Include="..\Gb.Oxen.Csv.DataProvider\Gb.Oxen.Csv.DataProvider.csproj" />
+    <ProjectReference Include="..\Gb.Oxen.Csv.Interfaces\Gb.Oxen.Csv.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

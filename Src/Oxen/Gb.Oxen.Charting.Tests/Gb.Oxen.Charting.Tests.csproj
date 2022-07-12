@@ -18,7 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Gb.Oxen.Charting.StandardProvider\Gb.Oxen.Charting.StandardProvider.csproj" />
+    <ProjectReference Include="..\Gb.Oxen.Charting.StandardProvider\Gb.Oxen.Charting.OxyPlotProvider.csproj" />
+    <ProjectReference Include="..\Gb.Oxen.Charting\Gb.Oxen.Charting.csproj" />
     <ProjectReference Include="..\Gb.Oxen.Core.DataInterfaces\Gb.Oxen.Core.Interfaces.csproj" />
   </ItemGroup>
 

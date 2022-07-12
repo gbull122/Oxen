@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gb.Oxen.Charting.StandardProvider
+namespace Gb.Oxen.Charting.Gog
 {
     public class Aesthetic
     {

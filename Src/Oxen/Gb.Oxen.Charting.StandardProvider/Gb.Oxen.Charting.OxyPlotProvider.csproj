@@ -4,7 +4,6 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <BaseOutputPath>C:\Users\georg\Documents\GitHub\Oxen\bin\</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Gb.Oxen.Charting.Interfaces\Gb.Oxen.Charting.Interfaces.csproj" />
     <ProjectReference Include="..\Gb.Oxen.Core.DataInterfaces\Gb.Oxen.Core.Interfaces.csproj" />
   </ItemGroup>
 

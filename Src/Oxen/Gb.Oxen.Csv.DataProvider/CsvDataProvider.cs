@@ -2,12 +2,13 @@ namespace Gb.Oxen.Csv.DataProvider;
 
 using Gb.Oxen.Core.Data;
 using Gb.Oxen.Core.Interfaces.Data;
+using Gb.Oxen.Csv.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-public class CvsDataProvider:IDataProvider
+public class CsvDataProvider:ICsvDataProvider
 {
 
     public async Task<IDataSet> LoadFile(IProgress<string> progress, string path, string datasetName)

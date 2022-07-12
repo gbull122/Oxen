@@ -1,6 +1,7 @@
 ﻿namespace Gb.Oxen.Csv.ViewModels;
 
 using Gb.Oxen.Core.Interfaces.Services;
+using Gb.Oxen.Csv.Interfaces;
 using Microsoft.Win32;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -12,14 +13,15 @@ public class RibbonViewModel : BindableBase
 {
     private readonly IDataService dataService;
     private readonly IDialogService dialogService;
-
+    private readonly ICsvDataProvider csvDataProvider;
     public DelegateCommand LoadCommand { get; private set; }
     public DelegateCommand SaveCommand { get; private set; }
 
-    public RibbonViewModel(IDataService dataService, IDialogService dialogService)
+    public RibbonViewModel(IDataService dataService, ICsvDataProvider csvDataProvider,IDialogService dialogService)
     {
         this.dataService = dataService;
         this.dialogService = dialogService;
+        this.csvDataProvider = csvDataProvider;
 
         LoadCommand = new DelegateCommand(Load);
         SaveCommand = new DelegateCommand(Save);
@@ -55,7 +57,7 @@ public class RibbonViewModel : BindableBase
             }
 
             IProgress<string> progress = new Progress<string>();
-            LoadCsvFile(progress, openFileDialog.FileName, dataSetName);
+            csvDataProvider.LoadFile(progress, openFileDialog.FileName, dataSetName);
             //await progressService.ExecuteAsync(LoadCsvFile, openFileDialog.FileName, dataSetName);
         }
     }

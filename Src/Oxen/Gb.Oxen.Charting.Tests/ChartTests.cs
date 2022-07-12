@@ -1,21 +1,20 @@
-using Gb.Oxen.Charting.StandardProvider;
+namespace Gb.Oxen.Charting.Tests;
+
+using Gb.Oxen.Charting.Gog;
 using Gb.Oxen.Core.Interfaces.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace Gb.Oxen.Charting.Tests
+[TestClass]
+public class ChartTests
 {
-    [TestClass]
-    public class ChartTests
+    [TestMethod]
+    public void TestMethod1()
     {
-        [TestMethod]
-        public void TestMethod1()
-        {
-            var chart = new Chart();
+        var chart = new Chart();
 
-            var data = new Mock<IDataSet>();
+        var data = new Mock<IDataSet>();
 
-            chart.AddLayer(data.Object);
-        }
+        chart.AddLayer(data.Object, Geom.Point);
     }
 }
