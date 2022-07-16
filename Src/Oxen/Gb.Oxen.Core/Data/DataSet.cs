@@ -41,7 +41,10 @@ public class DataSet : IDataSet, INotifyPropertyChanged
 
     public List<string> ObservationNames => observationNames;
 
-    public ObservableCollection<IVariable> Variables => variables;
+    public ObservableCollection<IVariable> GetVariables()
+    {
+        return variables;
+    }
 
     public DataSet(List<object[,]> rawData, string name)
     {
@@ -56,7 +59,7 @@ public class DataSet : IDataSet, INotifyPropertyChanged
 
             for (int col = firstColumnIndex; col < columnCount + firstColumnIndex; col++)
             {
-                var dColumn = new Variable(GetAColumn(area, col));
+                var dColumn = new Variable<double>(GetAColumn(area, col));
                 variables.Add(dColumn);
             }
         }
@@ -73,29 +76,40 @@ public class DataSet : IDataSet, INotifyPropertyChanged
         }
     }
 
-    public DataSet(List<IVariable> rawData, string name)
-    {
-        Name = name;
-        observationNames = CreateRowNames(rawData[0].Length);
-        foreach (var col in rawData)
-        {
-            variables.Add(col);
-        }
-    }
+    //public DataSet(List<IVariable> rawData, string name)
+    //{
+    //    Name = name;
+    //    observationNames = CreateRowNames(rawData[0].Length);
+    //    foreach (var col in rawData)
+    //    {
+    //        variables.Add(col);
+    //    }
+    //}
 
-    public DataSet(IReadOnlyList<IReadOnlyList<object>> data, IReadOnlyList<string> columnNames, string name)
-    {
-        Name = name;
-        observationNames = CreateRowNames(data[0].Count);
-        for (int variable = 0; variable < data.Count; variable++)
-        {
-            var thing = new List<object>(data[variable]);
-            thing.Insert(0, columnNames[variable]);
+    //public DataSet(IReadOnlyList<IReadOnlyList<object>> data, IReadOnlyList<string> columnNames, string name)
+    //{
+    //    Name = name;
+    //    observationNames = CreateRowNames(data[0].Count);
+    //    for (int variable = 0; variable < data.Count; variable++)
+    //    {
+    //        var thing = new List<object>(data[variable]);
+    //        thing.Insert(0, columnNames[variable]);
 
-            var dColumn = new Variable(thing.ToArray());
-            variables.Add(dColumn);
-        }
-    }
+    //        var dColumn = new Variable(thing.ToArray());
+    //        variables.Add(dColumn);
+    //    }
+    //}
+
+    //public IReadOnlyCollection<object> GetVaraibleData(string variable)
+    //{
+    //    foreach(var a in variables)
+    //    {
+    //        if (a.Name == variable)
+    //            return a.Values;
+    //    }
+
+    //    return null;
+    //}
 
     public object[] GetAColumn(object[,] rawData, int col)
     {

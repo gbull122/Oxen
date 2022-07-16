@@ -1,12 +1,19 @@
-﻿using System;
+﻿namespace Gb.Oxen.Charting.Gog;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gb.Oxen.Charting.Gog
+public class Aesthetic
 {
-    public class Aesthetic
+    private string variable;
+    private AestheticProperty property;
+
+    public Aesthetic(string variable, AestheticProperty property)
     {
+        this.variable = variable;
+        this.property = property;
     }
 }

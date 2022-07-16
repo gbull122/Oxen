@@ -8,7 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-public class Variable : IVariable, INotifyPropertyChanged
+public class Variable<T> : IVariable, INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -45,23 +45,23 @@ public class Variable : IVariable, INotifyPropertyChanged
         var conversionResult = CanConvertObjectArrayToDoubleArray(rawData);
         if (conversionResult.Item1)
         {
-            Values = conversionResult.Item2;
+            Values = (IReadOnlyCollection<T>?)conversionResult.Item2;
             Format = DataFormat.Continuous;
         }
         else
         {
-            DateTime dateResult;
-            if (DateTime.TryParseExact(rawData[1].ToString(), "dd/MM/yyyy hh:mm:ss",
-                CultureInfo.InvariantCulture, DateTimeStyles.None, out dateResult))
-            {
-                Values = ConvertDoubleToDateTime(rawData);
-                Format = DataFormat.DateTime;
-            }
-            else
-            {
-                Values = ArrayToCollection(rawData, true);
-                Format = DataFormat.Text;
-            }
+        //    DateTime dateResult;
+        //    if (DateTime.TryParseExact(rawData[1].ToString(), "dd/MM/yyyy hh:mm:ss",
+        //        CultureInfo.InvariantCulture, DateTimeStyles.None, out dateResult))
+        //    {
+        //        Values = ConvertDoubleToDateTime(rawData);
+        //        Format = DataFormat.DateTime;
+        //    }
+        //    else
+        //    {
+        //        Values = ArrayToCollection(rawData, true);
+        //        Format = DataFormat.Text;
+        //    }
         }
         Length = Values.Count;
     }
@@ -80,18 +80,18 @@ public class Variable : IVariable, INotifyPropertyChanged
         }
         else
         {
-            DateTime dateResult;
-            if (DateTime.TryParseExact(rawData[1].ToString(), "dd/MM/yyyy hh:mm:ss",
-                CultureInfo.InvariantCulture, DateTimeStyles.None, out dateResult))
-            {
-                Values = ConvertDoubleToDateTime(rawData);
-                Format = DataFormat.DateTime;
-            }
-            else
-            {
-                Values = ArrayToCollection(rawData, true);
-                Format = DataFormat.Text;
-            }
+            //DateTime dateResult;
+            //if (DateTime.TryParseExact(rawData[1].ToString(), "dd/MM/yyyy hh:mm:ss",
+            //    CultureInfo.InvariantCulture, DateTimeStyles.None, out dateResult))
+            //{
+            //    Values = ConvertDoubleToDateTime(rawData);
+            //    Format = DataFormat.DateTime;
+            //}
+            //else
+            //{
+            //    Values = ArrayToCollection(rawData, true);
+            //    Format = DataFormat.Text;
+            //}
         }
         Length = Values.Count;
     }
@@ -124,9 +124,9 @@ public class Variable : IVariable, INotifyPropertyChanged
         }
     }
 
-    public Tuple<bool, IReadOnlyCollection<object>> CanConvertObjectArrayToDoubleArray(object[] testStringArray, bool removeFirst = true)
+    public Tuple<bool, IReadOnlyCollection<T>> CanConvertObjectArrayToDoubleArray(object[] testStringArray, bool removeFirst = true)
     {
-        IReadOnlyCollection<object> convertedArray = null;
+        IReadOnlyCollection<double> convertedArray = null;
         var didDataConvert = false;
 
         var testArray = testStringArray.ToList();
@@ -135,10 +135,9 @@ public class Variable : IVariable, INotifyPropertyChanged
             testArray.RemoveAt(0);
         try
         {
-            IEnumerable<double> str = testArray
-                            .Select(x => Convert.ToDouble(x));
+            IEnumerable<double> str = testArray.Select(x => Convert.ToDouble(x));
 
-            convertedArray = str.Cast<object>().ToList().AsReadOnly();
+            convertedArray = str.Cast<double>().ToList().AsReadOnly();
             didDataConvert = true;
 
         }
@@ -147,7 +146,7 @@ public class Variable : IVariable, INotifyPropertyChanged
             ///Do nothing
         }
 
-        return new Tuple<bool, IReadOnlyCollection<object>>(didDataConvert, convertedArray);
+        return new Tuple<bool, IReadOnlyCollection<T>>(didDataConvert, (IReadOnlyCollection<T>)convertedArray);
     }
 
     public IReadOnlyCollection<object> TrimNansFromList(List<object> data)

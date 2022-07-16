@@ -18,4 +18,9 @@ public class Chart
 
         layers.Add(layer);
     }
+
+    public void Summary()
+    {
+
+    }
 }

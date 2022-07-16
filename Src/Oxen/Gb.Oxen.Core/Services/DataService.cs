@@ -73,7 +73,7 @@ public class DataService: IDataService
         var selection = new List<IVariable>();
         foreach (var dataSet in dataSets)
         {
-            foreach (var vari in dataSet.Variables)
+            foreach (var vari in dataSet.GetVariables())
             {
                 if (vari.IsSelected)
                     selection.Add(vari);
